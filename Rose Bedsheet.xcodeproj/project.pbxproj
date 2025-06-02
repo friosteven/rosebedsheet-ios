@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		59B909DD2DEB250E0025FA1E /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 59B909DC2DEB250E0025FA1E /* Common */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		599B68002DEB093A0032A3E3 /* Rose Bedsheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rose Bedsheet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B909DD2DEB250E0025FA1E /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = "Rose Bedsheet";
 			packageProductDependencies = (
+				59B909DC2DEB250E0025FA1E /* Common */,
 			);
 			productName = "Rose Bedsheet";
 			productReference = 599B68002DEB093A0032A3E3 /* Rose Bedsheet.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 599B67F72DEB093A0032A3E3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				59B909DB2DEB250E0025FA1E /* XCLocalSwiftPackageReference "../Common" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 599B68012DEB093A0032A3E3 /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		59B909DB2DEB250E0025FA1E /* XCLocalSwiftPackageReference "../Common" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Common;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		59B909DC2DEB250E0025FA1E /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 599B67F82DEB093A0032A3E3 /* Project object */;
 }
