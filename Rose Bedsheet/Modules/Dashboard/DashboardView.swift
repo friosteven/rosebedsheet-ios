@@ -38,15 +38,20 @@ struct DashboardView: View {
                 tabs: tabs,
                 config: tabConfig,
                 content: { item in
-                    VStack {
-                        Text(item.title)
-                    }.foregroundStyle(.red)
+                    if item.title == "Home" {
+                        homeTab
+                    }
                     
                 })
         }
         .onAppear(perform: {
             selectedTabId = tabs.first?.id ?? ""
         })
+    }
+    
+    
+    private var homeTab: some View {
+        HomeView()
     }
 }
 
