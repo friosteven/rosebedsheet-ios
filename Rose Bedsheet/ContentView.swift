@@ -6,11 +6,24 @@
 //
 
 import SwiftUI
+import Common
 
 struct ContentView: View {
+    @StateObject private var appRouter = AppRouter()
+    @Environment(\.scenePhase) var scenePhase
     var body: some View {
         DashboardView()
-        .padding()
+            .padding()
+            .onChange(of: scenePhase, perform: { value in
+                switch value {
+                case .active:
+                    _ = AppConfig.shared
+                default:
+                    print("")
+                }
+            })
+            .environmentObject(appRouter)
+            .globalAlertModifier()
     }
 }
 

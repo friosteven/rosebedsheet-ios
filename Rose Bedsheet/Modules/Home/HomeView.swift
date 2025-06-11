@@ -9,21 +9,30 @@ import SwiftUI
 import Common
 
 struct HomeView: View {
+    
+    @EnvironmentObject private var appRouter: AppRouter
+    
     var body: some View {
-        VStack(spacing: 32) {
-            headerView
-            buttonStackView
-            
-            HStack(spacing: 4) {
-                Text("Already have an account?")
-                    .applyTypography(.bodyRegularLeading)
-                    .foregroundStyle(AppColors.secondaryText)
+        NavigationStack(path: $appRouter.sellerRouter.path) {
+            VStack(spacing: 32) {
+                headerView
+                buttonStackView
+                
+                HStack(spacing: 4) {
+                    Text("Already have an account?")
+                        .applyTypography(.bodyRegularLeading)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .fixedSize()
+                    AppButton("Sign in", config: .init(style: .textOnly)) {
+                    }
                     .fixedSize()
-                AppButton("Sign in", config: .init(style: .textOnly)) {
                 }
-                .fixedSize()
             }
-        }.padding(.horizontal, 16)
+            .padding(.horizontal, 16)
+            .withAppRouter(router: appRouter.sellerRouter)
+            .withFullscreenCover(router: appRouter.sellerRouter, destination: $appRouter.sellerRouter.currentFullscreenDestination)
+            .withSheetCover(router: appRouter.sellerRouter, destination: $appRouter.sellerRouter.currentSheetDestination)
+        }
     }
     
     private var headerView: some View {
@@ -81,7 +90,10 @@ struct HomeView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
-            )
+                
+            ).onTapGesture {
+                appRouter.sellerRouter.navigate(to: .sellerDashboard(onDone: .init(callback: {})))
+            }
         }
     }
 }

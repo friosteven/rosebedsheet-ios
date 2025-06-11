@@ -30,6 +30,7 @@ struct DashboardView: View {
     ]
     
     @State private var selectedTabId: String = ""
+    @EnvironmentObject private var appRouter: AppRouter
     
     var body: some View {
         VStack {
@@ -40,8 +41,9 @@ struct DashboardView: View {
                 content: { item in
                     if item.title == "Home" {
                         homeTab
+                    } else {
+                        EmptyView()
                     }
-                    
                 })
         }
         .onAppear(perform: {
@@ -58,3 +60,4 @@ struct DashboardView: View {
 #Preview {
     DashboardView()
 }
+ 

@@ -8,5 +8,5 @@
 import Foundation
 
 class AppRouter: ObservableObject {
-    
+    @Published var sellerRouter = SellerRouter()
 }
