@@ -9,30 +9,31 @@ import SwiftUI
 import Common
 
 struct HomeView: View {
-    
-    @EnvironmentObject private var appRouter: AppRouter
+    @State private var isShowingSellerDashboardView = false
+    @State private var isShowingProductDetailView = false
     
     var body: some View {
-        NavigationStack(path: $appRouter.sellerRouter.path) {
-            VStack(spacing: 32) {
-                headerView
-                buttonStackView
-                
-                HStack(spacing: 4) {
-                    Text("Already have an account?")
-                        .applyTypography(.bodyRegularLeading)
-                        .foregroundStyle(AppColors.secondaryText)
-                        .fixedSize()
-                    AppButton("Sign in", config: .init(style: .textOnly)) {
-                    }
+        VStack(spacing: 32) {
+            headerView
+            buttonStackView
+            
+            HStack(spacing: 4) {
+                Text("Already have an account?")
+                    .applyTypography(.bodyRegularLeading)
+                    .foregroundStyle(AppColors.secondaryText)
                     .fixedSize()
+                AppButton("Sign in", config: .init(style: .textOnly)) {
                 }
+                .fixedSize()
             }
-            .padding(.horizontal, 16)
-            .withAppRouter(router: appRouter.sellerRouter)
-            .withFullscreenCover(router: appRouter.sellerRouter, destination: $appRouter.sellerRouter.currentFullscreenDestination)
-            .withSheetCover(router: appRouter.sellerRouter, destination: $appRouter.sellerRouter.currentSheetDestination)
         }
+        .padding(.horizontal, 16)
+        .fullScreenCover(isPresented: $isShowingSellerDashboardView, content: {
+            SellerDashboardView()
+        })
+        .fullScreenCover(isPresented: $isShowingProductDetailView, content: {
+            ProductDetailView()
+        })
     }
     
     private var headerView: some View {
@@ -74,7 +75,9 @@ struct HomeView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
-            )
+            ).onTapGesture {
+                isShowingSellerDashboardView = true
+            }
             
             AppCell(
                 title: "Become a Buyer",
@@ -90,10 +93,7 @@ struct HomeView: View {
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
                 }
-                
-            ).onTapGesture {
-                appRouter.sellerRouter.navigate(to: .sellerDashboard(onDone: .init(callback: {})))
-            }
+            )
         }
     }
 }
@@ -101,3 +101,4 @@ struct HomeView: View {
 #Preview {
     HomeView()
 }
+

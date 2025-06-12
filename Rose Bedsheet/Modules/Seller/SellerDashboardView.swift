@@ -26,12 +26,39 @@ struct SellerDashboardView: View {
          SellerItems(name: "Gift Card", price: 50.00, image: "giftcard.fill"),
          SellerItems(name: "Settings Cog", price: 5.00, image: nil) // Example with no image (will use default placeholder)
      ]
+    
+    @StateObject private var sellerRouter = SellerRouter()
+    @State private var isShowingProductDetails: Bool = false
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    
     var body: some View {
+        NavigationStack(path: $sellerRouter.path) {
+            content
+                .pad(horizontal: 16, vertical: 20)
+            .withSellerDestination(router: sellerRouter)
+            .withSellerFullscreenCover(router: sellerRouter, destination: $sellerRouter.currentFullscreenDestination)
+            .withSellerSheetCover(router: sellerRouter, destination: $sellerRouter.currentSheetDestination)
+        }
+    }
+    
+    private var content: some View {
         VStack(spacing: 40) {
             AppButton("Create New Listing",
                       config: .init(style: .affirm,
                                     icon: UIImage(systemName: "plus"), typography: .bodyRegularCenter)) {
-                
+                let dependencies = SellerCreateListingView.Dependencies(
+                    onTapSaveAsDraft: { value in
+                        print("will this work: \(value)")
+                        dismiss()
+                    }, onTapSubmit: {
+                        isShowingProductDetails = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                                sellerRouter.reset()
+                        })
+                    })
+                sellerRouter.navigate(to: .sellerCreateListing(dependencies: dependencies))
             }.frame(height: 50)
             
             AppListView(items,
@@ -44,7 +71,7 @@ struct SellerDashboardView: View {
                     subTitleTypography: .bodyRegularLeading,
                     subtitleColor: AppColors.secondaryText)
                 Button {
-                    
+                    isShowingProductDetails = true
                 } label: {
                     AppCell(title: item.name,
                             subTitle: String(item.price),
@@ -54,12 +81,11 @@ struct SellerDashboardView: View {
                     })
                 }.cardStyle()
             })
-            
             Spacer()
         }
-        .padding(.vertical, 20)
-        .padding(.horizontal, 16)
-        .background(AppColors.surface)
+        .fullScreenCover(isPresented: $isShowingProductDetails, content: {
+            ProductDetailView()
+        })
     }
 }
 

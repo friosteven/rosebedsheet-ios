@@ -9,6 +9,14 @@ import SwiftUI
 import Common
 
 struct SellerCreateListingView: View {
+    
+    struct Dependencies: EquatableHashableStruct {
+        let id = UUID()
+        
+        var onTapSaveAsDraft: ((String) -> Void)?
+        var onTapSubmit: (() -> Void)?
+    }
+    
     @State private var productNameText = ""
     @State private var productDescriptionText = ""
     @State private var selectedProductType: String = ""
@@ -18,6 +26,13 @@ struct SellerCreateListingView: View {
     @State private var quantityText = ""
     
     @StateObject private var viewModel = SellerViewModel()
+    
+    var dependencies: Dependencies
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
+    
     var body: some View {
         VStack {
             AppContainerView(title: "Create Listing",
@@ -98,6 +113,28 @@ struct SellerCreateListingView: View {
                             .pad(horizontal: 4, vertical: 12)
                     }
                     
+                    AppFlowLayoutView(viewModel.designTypesModel,
+                                      selectionMode: .singleSelect,
+                                      verticalSpacing: 0,
+                                      sectionTitle: "Design£ Type") { value, isSelected in
+                        VStack {
+                            Text(value.name)
+                                .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
+                                .foregroundStyle(isSelected ? AppColors.surface : AppColors.primaryText)
+                                .pad(horizontal: 16, vertical: 8)
+                        }
+                        .background(isSelected ? AppColors.primary : AppColors.border)
+                        .cornerRadius(24, corners: .allCorners)
+                        .cardStyle(
+                            cornerRadius: 24,
+                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
+                            shadowY: isSelected ? 8 : 0,
+                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
+                            borderWidth: isSelected ? 2 : 0
+                        )
+                        .pad(horizontal: 4, vertical: 8)
+                    }
+                    
                     AppTextField(
                         text: $priceText,
                         placeholder: "Price",
@@ -114,10 +151,12 @@ struct SellerCreateListingView: View {
             
             HStack(spacing: 16) {
                 AppButton("Save as draft", config: .init(style: .outlineAffirm)) {
-                    
+                    dependencies.onTapSaveAsDraft?("Save as draft pressed")
                 }
                 
                 AppButton("Submit") {
+                    dependencies.onTapSubmit?()
+//                    AppAlert.show(title: "hehehe")
                 }
             }
             .frame(height: 48)
@@ -127,11 +166,12 @@ struct SellerCreateListingView: View {
         .task {
             await viewModel.fetchColors()
             await viewModel.fetchProductTypes()
-            await viewModel.fetchFabrics()
+            await viewModel.fetchFabricTypes()
+            await viewModel.fetchDesignTypes()
         }
     }
 }
 
 #Preview {
-    SellerCreateListingView()
+    SellerCreateListingView(dependencies: SellerCreateListingView.Dependencies())
 }

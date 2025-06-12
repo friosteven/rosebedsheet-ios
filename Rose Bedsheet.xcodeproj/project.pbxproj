@@ -15,6 +15,7 @@
 		592F6D7E2DEFC89500C45452 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 592F6D7D2DEFC89500C45452 /* Common */; };
 		593432612DF9A9A500971358 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 593432602DF9A9A500971358 /* Common */; };
 		594C03A12DF9053800FD267C /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 594C03A02DF9053800FD267C /* Common */; };
+		59AA653B2DFAD988006B0B54 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 59AA653A2DFAD988006B0B54 /* Common */; };
 		59B909DD2DEB250E0025FA1E /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 59B909DC2DEB250E0025FA1E /* Common */; };
 		59F4DE9A2DF10C360055B09F /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 59F4DE992DF10C360055B09F /* Common */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 				591200E42DF7A3600091303F /* Common in Frameworks */,
 				59B909DD2DEB250E0025FA1E /* Common in Frameworks */,
 				591201112DF7AF7C0091303F /* netfox in Frameworks */,
+				59AA653B2DFAD988006B0B54 /* Common in Frameworks */,
 				592F6D7E2DEFC89500C45452 /* Common in Frameworks */,
 				590226C02DF7B024005361EF /* Common in Frameworks */,
 				593432612DF9A9A500971358 /* Common in Frameworks */,
@@ -107,6 +109,7 @@
 				59086E0F2DF862C400A28A01 /* Common */,
 				594C03A02DF9053800FD267C /* Common */,
 				593432602DF9A9A500971358 /* Common */,
+				59AA653A2DFAD988006B0B54 /* Common */,
 			);
 			productName = "Rose Bedsheet";
 			productReference = 599B68002DEB093A0032A3E3 /* Rose Bedsheet.app */;
@@ -139,7 +142,7 @@
 			packageReferences = (
 				592B53402DF56AC4002AF17E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5912010F2DF7AF7C0091303F /* XCRemoteSwiftPackageReference "netfox" */,
-				5934325F2DF9A9A500971358 /* XCLocalSwiftPackageReference "../Common" */,
+				59AA65392DFAD988006B0B54 /* XCLocalSwiftPackageReference "../Common" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 599B68012DEB093A0032A3E3 /* Products */;
@@ -309,6 +312,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,6 +342,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,7 +380,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		5934325F2DF9A9A500971358 /* XCLocalSwiftPackageReference "../Common" */ = {
+		59AA65392DFAD988006B0B54 /* XCLocalSwiftPackageReference "../Common" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Common;
 		};
@@ -432,6 +437,10 @@
 			productName = Common;
 		};
 		594C03A02DF9053800FD267C /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+		59AA653A2DFAD988006B0B54 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
 		};
