@@ -12,6 +12,7 @@ struct Rose_BedsheetApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .inititalizeApp()
         }
     }
 }
