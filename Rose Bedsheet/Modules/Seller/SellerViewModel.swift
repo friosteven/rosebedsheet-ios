@@ -12,6 +12,7 @@ class SellerViewModel: ObservableObject {
     @Published private(set) var colorsModel: [ColorModel] = []
     @Published private(set) var productTypesModel: [ProductTypeModel] = []
     @Published private(set) var fabricsModel: [FabricModel] = []
+    @Published private(set) var designTypesModel: [DesignTypeModel] = []
     
     @Published private var sellerService: SellerService
     
@@ -39,9 +40,18 @@ class SellerViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchFabrics() async {
+    func fetchFabricTypes() async {
         do {
-            fabricsModel = try await sellerService.fetchFabrics().get()
+            fabricsModel = try await sellerService.fetchFabricTypes().get()
+        } catch {
+            
+        }
+    }
+    
+    @MainActor
+    func fetchDesignTypes() async {
+        do {
+            designTypesModel = try await sellerService.fetchDesignTypes().get()
         } catch {
             
         }

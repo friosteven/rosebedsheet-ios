@@ -19,8 +19,15 @@ struct ProductTypeModel: Codable, Identifiable, Hashable {
     let name, type: String
 }
 
-// MARK: - ProductTypeModel
+// MARK: - FabricModel
 struct FabricModel: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let key: String
+}
+
+// MARK: - DesignTypeModel
+struct DesignTypeModel: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let key: String
