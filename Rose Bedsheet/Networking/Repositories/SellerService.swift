@@ -10,37 +10,41 @@ import Common
 
 protocol SellerServiceProtocol {
     func fetchColors() async throws -> Result<[ColorModel], RequestError>
-    func fetchProductTypes() async throws -> Result<[ProductTypeModel], RequestError>
-    func fetchFabricTypes() async throws -> Result<[FabricModel], RequestError>
-    func fetchDesignTypes() async throws -> Result<[DesignTypeModel], RequestError>
+    func fetchCategories() async throws -> Result<[CategoryModel], RequestError>
+    func fetchMaterials() async throws -> Result<[MaterialModel], RequestError>
+    func fetchDesigns() async throws -> Result<[DesignModel], RequestError>
 }
 
 class SellerService: SellerServiceProtocol {
     private let colorRepository: GenericRepository<ColorModel>
-    private let productTypeRepository: GenericRepository<ProductTypeModel>
-    private let fabricRepository: GenericRepository<FabricModel>
-    private let designTypeRepository: GenericRepository<DesignTypeModel>
+    private let categoriesRepository: GenericRepository<CategoryModel>
+    private let materialsRepository: GenericRepository<MaterialModel>
+    private let designsRepository: GenericRepository<DesignModel>
 
     init(httpClient: HTTPClient) {
-        self.colorRepository = GenericRepository(httpClient: httpClient, path: "/rpc/get_colors")
-        self.productTypeRepository = GenericRepository(httpClient: httpClient, path: "/rpc/get_product_types")
-        self.fabricRepository = GenericRepository(httpClient: httpClient, path: "/rpc/get_fabric_types")
-        self.designTypeRepository = GenericRepository(httpClient: httpClient, path: "/rpc/get_design_types")
+        self.colorRepository = GenericRepository(httpClient: httpClient, path: "/colors")
+        self.categoriesRepository = GenericRepository(httpClient: httpClient, path: "/categories")
+        self.materialsRepository = GenericRepository(httpClient: httpClient, path: "/materials")
+        self.designsRepository = GenericRepository(httpClient: httpClient, path: "/designs")
     }
 
     func fetchColors() async throws -> Result<[ColorModel], RequestError> {
-        return await colorRepository.getAll()
+        let params = [URLQueryItem(name: "select", value: "*")]
+        return await colorRepository.getAll(params: params)
     }
 
-    func fetchProductTypes() async throws -> Result<[ProductTypeModel], RequestError> {
-        return await productTypeRepository.getAll()
+    func fetchCategories() async throws -> Result<[CategoryModel], RequestError> {
+        let params = [URLQueryItem(name: "select", value: "*")]
+        return await categoriesRepository.getAll(params: params)
     }
 
-    func fetchFabricTypes() async throws -> Result<[FabricModel], RequestError> {
-        return await fabricRepository.getAll()
+    func fetchMaterials() async throws -> Result<[MaterialModel], RequestError> {
+        let params = [URLQueryItem(name: "select", value: "*")]
+        return await materialsRepository.getAll(params: params)
     }
 
-    func fetchDesignTypes() async throws -> Result<[DesignTypeModel], RequestError> {
-        return await designTypeRepository.getAll()
+    func fetchDesigns() async throws -> Result<[DesignModel], RequestError> {
+        let params = [URLQueryItem(name: "select", value: "*")]
+        return await designsRepository.getAll(params: params)
     }
 }

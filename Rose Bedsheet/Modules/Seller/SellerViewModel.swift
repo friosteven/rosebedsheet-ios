@@ -10,9 +10,9 @@ import Common
 
 class SellerViewModel: ObservableObject {
     @Published private(set) var colorsModel: [ColorModel] = []
-    @Published private(set) var productTypesModel: [ProductTypeModel] = []
-    @Published private(set) var fabricsModel: [FabricModel] = []
-    @Published private(set) var designTypesModel: [DesignTypeModel] = []
+    @Published private(set) var categoriesModel: [CategoryModel] = []
+    @Published private(set) var materialsModel: [MaterialModel] = []
+    @Published private(set) var designsModel: [DesignModel] = []
     
     @Published private var sellerService: SellerService
     
@@ -31,27 +31,27 @@ class SellerViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchProductTypes() async {
+    func fetchCategories() async {
         do {
-            productTypesModel = try await sellerService.fetchProductTypes().get()
+            categoriesModel = try await sellerService.fetchCategories().get()
         } catch {
             
         }
     }
     
     @MainActor
-    func fetchFabricTypes() async {
+    func fetchMaterials() async {
         do {
-            fabricsModel = try await sellerService.fetchFabricTypes().get()
+            materialsModel = try await sellerService.fetchMaterials().get()
         } catch {
             
         }
     }
     
     @MainActor
-    func fetchDesignTypes() async {
+    func fetchDesigns() async {
         do {
-            designTypesModel = try await sellerService.fetchDesignTypes().get()
+            designsModel = try await sellerService.fetchDesigns().get()
         } catch {
             
         }

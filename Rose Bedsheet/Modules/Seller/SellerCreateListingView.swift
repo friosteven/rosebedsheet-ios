@@ -50,11 +50,11 @@ struct SellerCreateListingView: View {
                         type: .multiline(maxLength: 500),
                         placeholderStyle: .floating)
                     
-                    AppListView(viewModel.productTypesModel,
+                    AppListView(viewModel.categoriesModel,
                                 selectionMode: .multiSelect(limit: 5),
                                 scrollDirection: .horizontal,
                                 showsIndicators: false,
-                                sectionTitle: "Product Type") { value, isSelected in
+                                sectionTitle: "Category") { value, isSelected in
                         VStack {
                             Text(value.name)
                                 .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
@@ -73,7 +73,7 @@ struct SellerCreateListingView: View {
                         .pad(horizontal: 4, vertical: 12)
                     }
                     
-                    AppFlowLayoutView(viewModel.fabricsModel,
+                    AppFlowLayoutView(viewModel.materialsModel,
                                       selectionMode: .singleSelect,
                                       verticalSpacing: 0,
                                       sectionTitle: "Fabric Type") { value, isSelected in
@@ -113,10 +113,10 @@ struct SellerCreateListingView: View {
                             .pad(horizontal: 4, vertical: 12)
                     }
                     
-                    AppFlowLayoutView(viewModel.designTypesModel,
+                    AppFlowLayoutView(viewModel.designsModel,
                                       selectionMode: .singleSelect,
                                       verticalSpacing: 0,
-                                      sectionTitle: "Design£ Type") { value, isSelected in
+                                      sectionTitle: "Design Type") { value, isSelected in
                         VStack {
                             Text(value.name)
                                 .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
@@ -165,9 +165,9 @@ struct SellerCreateListingView: View {
         .background(AppColors.inputBackground)
         .task {
             await viewModel.fetchColors()
-            await viewModel.fetchProductTypes()
-            await viewModel.fetchFabricTypes()
-            await viewModel.fetchDesignTypes()
+            await viewModel.fetchCategories()
+            await viewModel.fetchMaterials()
+            await viewModel.fetchDesigns()
         }
     }
 }

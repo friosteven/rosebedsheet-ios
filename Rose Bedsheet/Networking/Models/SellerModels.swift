@@ -13,21 +13,21 @@ struct ColorModel: Codable, Identifiable, Hashable {
     let name, hex: String
 }
 
-// MARK: - ProductTypeModel
-struct ProductTypeModel: Codable, Identifiable, Hashable {
+// MARK: - CategoryModel
+struct CategoryModel: Codable, Identifiable, Hashable {
     let id: Int
     let name, type: String
 }
 
-// MARK: - FabricModel
-struct FabricModel: Codable, Identifiable, Hashable {
+// MARK: - MaterialModel
+struct MaterialModel: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let key: String
 }
 
-// MARK: - DesignTypeModel
-struct DesignTypeModel: Codable, Identifiable, Hashable {
+// MARK: - DesignModel
+struct DesignModel: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let key: String
