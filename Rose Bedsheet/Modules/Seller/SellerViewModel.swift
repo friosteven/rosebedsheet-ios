@@ -13,6 +13,9 @@ class SellerViewModel: ObservableObject {
     @Published private(set) var categoriesModel: [CategoryModel] = []
     @Published private(set) var materialsModel: [MaterialModel] = []
     @Published private(set) var designsModel: [DesignModel] = []
+    @Published private(set) var categoriesWithSizesModel: [CategoriesWithSizesModel] = []
+    
+    @Published var sizesBasedOnSelectedCategory: [SizeModel] = []
     
     @Published private var sellerService: SellerService
     
@@ -55,5 +58,20 @@ class SellerViewModel: ObservableObject {
         } catch {
             
         }
+    }
+    
+    @MainActor
+    func fetchCategoriesWithSizes() async {
+        do {
+            categoriesWithSizesModel = try await sellerService.fetchCategoriesWithSizes().get()
+        } catch {
+            
+        }
+    }
+    
+    func setSizesBasedOnSelectedCategory(selectedCategory: CategoriesWithSizesModel) {
+        sizesBasedOnSelectedCategory = categoriesWithSizesModel.filter({
+            $0.name == selectedCategory.name
+        }).first?.sizes ?? []
     }
 }

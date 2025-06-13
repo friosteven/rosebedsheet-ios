@@ -32,3 +32,20 @@ struct DesignModel: Codable, Identifiable, Hashable {
     let name: String
     let key: String
 }
+
+
+// MARK: - CategoriesWithSizesModel
+struct CategoriesWithSizesModel: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let type: String
+    let sizes: [SizeModel]
+}
+
+// MARK: - SizeModel
+struct SizeModel: Codable, Identifiable, Hashable {
+    let id: Int
+    let name: String
+    let width: Int
+    let length: Int
+}

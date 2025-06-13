@@ -64,7 +64,7 @@ struct SellerDashboardView: View {
             AppListView(items,
                         sectionTitle: "My Listed Items",
                         sectionNavTitle: "View All",
-                        content: { item, isSelected in
+                        content: { item, selectedItems, isSelected in
                 let config = AppCellTypographyConfiguration(
                     titleTypography: .bodySemiboldLeading,
                     titleColor: AppColors.primaryText,

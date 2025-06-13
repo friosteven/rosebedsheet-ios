@@ -50,11 +50,40 @@ struct SellerCreateListingView: View {
                         type: .multiline(maxLength: 500),
                         placeholderStyle: .floating)
                     
-                    AppListView(viewModel.categoriesModel,
-                                selectionMode: .multiSelect(limit: 5),
+                    AppListView(viewModel.categoriesWithSizesModel,
+                                selectionMode: .singleSelect,
                                 scrollDirection: .horizontal,
                                 showsIndicators: false,
-                                sectionTitle: "Category") { value, isSelected in
+                                sectionTitle: "Category") { value, selectedItems, isSelected in
+                        
+                        VStack {
+                            Text(value.name)
+                                .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
+                                .foregroundStyle(isSelected ? AppColors.surface : AppColors.primaryText)
+                                .pad(horizontal: 16, vertical: 8)
+                        }
+                        .background(isSelected ? AppColors.primary : AppColors.border)
+                        .cornerRadius(24, corners: .allCorners)
+                        .cardStyle(
+                            cornerRadius: 24,
+                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
+                            shadowY: isSelected ? 8 : 0,
+                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
+                            borderWidth: isSelected ? 2 : 0
+                        )
+                        .pad(horizontal: 4, vertical: 12)
+                        .onChange(of: selectedItems, perform: { value in
+                            if let selectedCategory = value.first {
+                                viewModel.setSizesBasedOnSelectedCategory(selectedCategory: selectedCategory)
+                            }
+                        })
+                    }
+                    
+                    AppListView(viewModel.sizesBasedOnSelectedCategory,
+                                selectionMode: .singleSelect,
+                                scrollDirection: .horizontal,
+                                showsIndicators: false,
+                                sectionTitle: "Size") { value, selectedItems, isSelected in
                         VStack {
                             Text(value.name)
                                 .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
@@ -76,7 +105,7 @@ struct SellerCreateListingView: View {
                     AppFlowLayoutView(viewModel.materialsModel,
                                       selectionMode: .singleSelect,
                                       verticalSpacing: 0,
-                                      sectionTitle: "Fabric Type") { value, isSelected in
+                                      sectionTitle: "Material") { value, selectedItems, isSelected in
                         VStack {
                             Text(value.name)
                                 .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
@@ -99,7 +128,7 @@ struct SellerCreateListingView: View {
                                 selectionMode: .multiSelect(limit: 5),
                                 scrollDirection: .horizontal,
                                 showsIndicators: false,
-                                sectionTitle: "Color") { value, isSelected in
+                                sectionTitle: "Color") { value, selectedItems, isSelected in
                         Circle()
                             .fill(Color(hex: value.hex))
                             .frame(width: 48, height: 48)
@@ -116,7 +145,7 @@ struct SellerCreateListingView: View {
                     AppFlowLayoutView(viewModel.designsModel,
                                       selectionMode: .singleSelect,
                                       verticalSpacing: 0,
-                                      sectionTitle: "Design Type") { value, isSelected in
+                                      sectionTitle: "Design Type") { value, selectedItems, isSelected in
                         VStack {
                             Text(value.name)
                                 .applyTypography(isSelected ? .bodySemiboldLeading : .bodyRegularLeading)
@@ -156,7 +185,7 @@ struct SellerCreateListingView: View {
                 
                 AppButton("Submit") {
                     dependencies.onTapSubmit?()
-//                    AppAlert.show(title: "hehehe")
+                    //                    AppAlert.show(title: "hehehe")
                 }
             }
             .frame(height: 48)
@@ -165,7 +194,7 @@ struct SellerCreateListingView: View {
         .background(AppColors.inputBackground)
         .task {
             await viewModel.fetchColors()
-            await viewModel.fetchCategories()
+            await viewModel.fetchCategoriesWithSizes()
             await viewModel.fetchMaterials()
             await viewModel.fetchDesigns()
         }
