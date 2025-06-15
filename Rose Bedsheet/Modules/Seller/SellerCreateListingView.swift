@@ -39,6 +39,12 @@ struct SellerCreateListingView: View {
                              config: .navbarConfig,
                              content: {
                 VStack(spacing: 24) {
+                    AppPhotosPicker(title: "Product photos",
+                                    styleConfig: .default,
+                                    cardStyleConfig: .default,
+                                    displayMode: .dontReplacePlaceHolder(limit: 12)) {
+                        
+                    }
                     AppTextField(
                         text: $productNameText,
                         placeholder: "Product Name",
