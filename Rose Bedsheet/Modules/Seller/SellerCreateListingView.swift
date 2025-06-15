@@ -64,13 +64,7 @@ struct SellerCreateListingView: View {
                         }
                         .background(isSelected ? AppColors.primary : AppColors.border)
                         .cornerRadius(24, corners: .allCorners)
-                        .cardStyle(
-                            cornerRadius: 24,
-                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
-                            shadowY: isSelected ? 8 : 0,
-                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
-                            borderWidth: isSelected ? 2 : 0
-                        )
+                        .cardStyle(isSelected ? .selected : .nonSelected)
                         .pad(horizontal: 4, vertical: 12)
                         .onChange(of: selectedItems, perform: { value in
                             if let selectedCategory = value.first {
@@ -92,13 +86,7 @@ struct SellerCreateListingView: View {
                         }
                         .background(isSelected ? AppColors.primary : AppColors.border)
                         .cornerRadius(24, corners: .allCorners)
-                        .cardStyle(
-                            cornerRadius: 24,
-                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
-                            shadowY: isSelected ? 8 : 0,
-                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
-                            borderWidth: isSelected ? 2 : 0
-                        )
+                        .cardStyle(isSelected ? .selected : .nonSelected)
                         .pad(horizontal: 4, vertical: 12)
                     }
                     
@@ -114,13 +102,7 @@ struct SellerCreateListingView: View {
                         }
                         .background(isSelected ? AppColors.primary : AppColors.border)
                         .cornerRadius(24, corners: .allCorners)
-                        .cardStyle(
-                            cornerRadius: 24,
-                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
-                            shadowY: isSelected ? 8 : 0,
-                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
-                            borderWidth: isSelected ? 2 : 0
-                        )
+                        .cardStyle(isSelected ? .selected : .nonSelected)
                         .pad(horizontal: 4, vertical: 8)
                     }
                     
@@ -132,13 +114,7 @@ struct SellerCreateListingView: View {
                         Circle()
                             .fill(Color(hex: value.hex))
                             .frame(width: 48, height: 48)
-                            .cardStyle(
-                                cornerRadius: 24,
-                                shadowColor: isSelected ? .black.opacity(0.25) : .clear,
-                                shadowY: isSelected ? 8 : 0,
-                                borderColor: isSelected ? .black.opacity(0.75) : .clear,
-                                borderWidth: isSelected ? 2 : 0
-                            )
+                            .cardStyle(isSelected ? .selected : .nonSelected)
                             .pad(horizontal: 4, vertical: 12)
                     }
                     
@@ -154,13 +130,7 @@ struct SellerCreateListingView: View {
                         }
                         .background(isSelected ? AppColors.primary : AppColors.border)
                         .cornerRadius(24, corners: .allCorners)
-                        .cardStyle(
-                            cornerRadius: 24,
-                            shadowColor: isSelected ? .black.opacity(0.25) : .clear,
-                            shadowY: isSelected ? 8 : 0,
-                            borderColor: isSelected ? .black.opacity(0.5) : .clear,
-                            borderWidth: isSelected ? 2 : 0
-                        )
+                        .cardStyle(isSelected ? .selected : .nonSelected)
                         .pad(horizontal: 4, vertical: 8)
                     }
                     
