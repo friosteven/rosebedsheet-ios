@@ -23,14 +23,20 @@ struct ProductDetailView: View {
     }
 
     private var content: some View {
-        VStack {
-            Text("Product Detail View")
-            Button {
-                dismiss()
-            } label: {
-                Text("dismiss")
+        AppContainerView(title: "Product Detail", content: {
+            VStack(alignment: .leading) {
+                Text("Title")
+                
+                Text("Description")
+                
+                HStack(alignment: .bottom) {
+                    Text("Price")
+                    
+                    Text("In stock")
+                }
             }
-        }
+            .cardStyle()
+        })
     }
 }
 
@@ -46,4 +52,8 @@ struct ProductReviewsView: View {
     var body: some View {
         Text("Product Reviews")
     }
+}
+
+#Preview {
+    ProductDetailView()
 }
